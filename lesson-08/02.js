@@ -1,14 +1,29 @@
-/*
- * Напишите функцию isNumeric, которая принимает строку и проверяет, представляет ли эта строка корректное числовое значение.
- * Если строка является числом, функция должна возвращать true, в противном случае - false.
- */
-
 function isNumeric(str) {
-  // your code
+  // Проверяем, что строка не пустая и не состоит из пробелов
+  if (typeof str !== 'string' || str.trim() === '') {
+    return false;
+  }
+
+  // Пробуем преобразовать строку в число
+  const num = parseFloat(str);
+
+  // Проверяем:
+  // 1. Что преобразование не дало NaN
+  // 2. Что преобразованное число в строке равно исходной строке (без учета пробелов)
+  // 3. Что это конечное число (не Infinity)
+  return !isNaN(num) &&
+         num.toString() === str.trim() &&
+         isFinite(num);
 }
 
-// console.log(isNumeric("123")) // Ожидаемый результат: true
-// console.log(isNumeric("12.3")) // Ожидаемый результат: true
-// console.log(isNumeric("123abc")) // Ожидаемый результат: false
-// console.log(isNumeric("abc")) // Ожидаемый результат: false
-// console.log(isNumeric(" ")) // Ожидаемый результат: false
+// Тестовые случаи
+console.log(isNumeric("123"));      // true
+console.log(isNumeric("12.3"));     // true
+console.log(isNumeric("-12.3"));    // true
+console.log(isNumeric("+12.3"));    // true
+console.log(isNumeric("123abc"));   // false
+console.log(isNumeric("abc"));      // false
+console.log(isNumeric(" "));        // false
+console.log(isNumeric("12.3.4"));   // false
+console.log(isNumeric(""));         // false
+console.log(isNumeric("Infinity")); // false
