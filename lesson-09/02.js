@@ -1,5 +1,5 @@
 startButton.addEventListener('click', () => {
-  if (isTimerStarted) return // предотвращаем повторный запуск
+  if (isTimerStarted) return
 
   let counter = 3
   countdownDisplay.textContent = counter
@@ -7,6 +7,7 @@ startButton.addEventListener('click', () => {
 
   timerId = setInterval(() => {
     counter--
+
     if (counter === 0) {
       countdownDisplay.textContent = '🚀'
       clearInterval(timerId)
